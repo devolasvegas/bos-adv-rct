@@ -1,3 +1,4 @@
+// Connects to the remote Prisma DB and gives us the ability to query using JS
 const { Prisma } = require('prisma-binding');
 
 const db = new Prisma({
