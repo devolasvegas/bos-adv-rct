@@ -6,6 +6,8 @@
     "titleBar.inactiveBackground": "#FFC600CC"
   },
   "emmet.includeLanguages": {
-    "javascript": "javascriptreact"
-  }
+    "javascript": "javascriptreact",
+    "vue-html": "html"
+  },
+  "editor.tabSize": 2
 }
