@@ -62,7 +62,7 @@ class CreateItem extends Component {
     this.setState({
       image: file.secure_url,
       largeImage: file.eager[0].secure_url,
-    })
+    });
   }
 
   render() {
@@ -77,10 +77,10 @@ class CreateItem extends Component {
               const res = await createItem();
               // Send user to single item page
               console.log(res);
-              // Router.push({
-              //   pathname: '/item',
-              //   query: { id: res.data.createItem.id },
-              // })
+              Router.push({
+                pathname: '/item',
+                query: { id: res.data.createItem.id },
+              })
             }
           }>
             <Error error={ error } />
@@ -92,7 +92,6 @@ class CreateItem extends Component {
                   id="file" 
                   name="file" 
                   placeholder="Upload an image" 
-                  value={ this.state.image }
                   onChange={ this.uploadFile }
                   required 
                 />
