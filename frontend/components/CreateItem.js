@@ -35,7 +35,7 @@ class CreateItem extends Component {
     description: '',
     image: '',
     largeImage: '',
-    price: 1000,
+    price: 0,
   }
 
   handleChange = (e) => {
@@ -56,6 +56,10 @@ class CreateItem extends Component {
               const res = await createItem();
               // Send user to single item page
               console.log(res);
+              // Router.push({
+              //   pathname: '/item',
+              //   query: { id: res.data.createItem.id },
+              // })
             }
           }>
             <Error error={ error } />
