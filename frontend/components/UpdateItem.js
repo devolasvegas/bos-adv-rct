@@ -8,6 +8,17 @@ import Error from './ErrorMessage';
 
 import formatMoney from '../lib/formatMoney';
 
+const SINGLE_ITEM_QUERY = gql`
+  query SINGLE_ITEM_QUERY($id: ID!) {
+    item(where: { id: $id }) {
+      id
+      title
+      description
+      price
+    }
+  }
+`;
+
 const UPDATE_ITEM_MUTATION = gql`
   mutation UPDATE_ITEM_MUTATION(
     $title: String!
@@ -30,39 +41,12 @@ const UPDATE_ITEM_MUTATION = gql`
 
 class UpdateItem extends Component {
 
-  state = {
-    title: '',
-    description: '',
-    image: '',
-    largeImage: '',
-    price: 0,
-  }
+  state = {}
 
   handleChange = (e) => {
     const { name, type, value } = e.target;
     const val = type === 'number' ? parseFloat(value) : value;
     this.setState({ [name]: val });
-  }
-
-  uploadFile = async e => {
-    console.log('Uploading file . . .');
-    const files = e.target.files;
-    const data = new FormData();
-    data.append('file', files[0]);
-    data.append('upload_preset', 'sickfits');
-
-    const res = await fetch('https://api.cloudinary.com/v1_1/dk70obgrm/image/upload', {
-      method: 'POST',
-      body: data,
-    })
-
-    const file = await res.json();
-    console.log(file);
-
-    this.setState({
-      image: file.secure_url,
-      largeImage: file.eager[0].secure_url,
-    });
   }
 
   render() {
@@ -85,18 +69,6 @@ class UpdateItem extends Component {
           }>
             <Error error={ error } />
             <fieldset disabled={ loading } aria-busy={ loading }>
-            <label htmlFor="file">
-                Image
-                <input 
-                  type="file" 
-                  id="file" 
-                  name="file" 
-                  placeholder="Upload an image" 
-                  onChange={ this.uploadFile }
-                  required 
-                />
-                { this.state.image && <img src={ this.state.image } alt="Upload Preview" width="200" /> }
-              </label>
               <label htmlFor="title">
                 Title
                 <input 
