@@ -37,8 +37,12 @@ class SingleItem extends Component {
           if(error) return <Error error={ error } />;
           if(loading) return <p>Loading &hellip;</p>;
           if(!data.item) return <p>No item found for ID: { this.props.id }</p>;
-          console.log(data)
-          return <p>Single Item Component, biiiiiiittttttccchhhhh!!!!</p>;
+          const item = data.item;
+          return (
+            <SingleItemStyles>
+              <img src={ item.largeImage } alt={ item.title }/>
+            </SingleItemStyles>
+          );
         } }
       </Query>
     )
