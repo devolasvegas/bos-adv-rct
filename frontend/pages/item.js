@@ -1,7 +1,8 @@
+import SingleItem from '../components/SingleItem';
 
 const Item = props => (
   <div>
-    <p>Single Item, Y'all!</p>
+    <SingleItem />
   </div>
 )
 
