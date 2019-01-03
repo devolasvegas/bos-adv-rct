@@ -1,5 +1,6 @@
 import React from 'react';
 import gql from 'graphql-tools';
+import Query from 'graphql-tools';
 
 import PaginationStyles from './styles/PaginationStyles';
 
