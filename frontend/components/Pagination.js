@@ -3,6 +3,7 @@ import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 
 import PaginationStyles from './styles/PaginationStyles';
+import { perPage } from '../config';
 
 const PAGINATION_QUERY = gql`
   query PAGINATION_QUERY {
@@ -17,9 +18,15 @@ const PAGINATION_QUERY = gql`
 const Pagination = props => (
   <PaginationStyles>
     <Query query={ PAGINATION_QUERY }>
-      { ({ data, loading, error }) => (
-        <p>Sup, I'm the pagination. { data.itemsConnection.aggregate.count }</p>
-      ) }
+      { ({ data, loading, error }) => {
+        const count = data.itemsConnection.aggregate.count;
+        const pages = count/perPage;
+        if(loading) return <p>Loading &hellip;</p>;
+        return (
+          <p>Sup, I'm the pagination. { count }</p>
+        )
+        }
+      }
     </Query>
   </PaginationStyles>
 );
