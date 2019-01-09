@@ -1,3 +1,11 @@
+enum Permission {
+  ADMIN
+  USER
+  ITEMCREATE
+  ITEMUPDATE
+  PERMISSIONUPDATE
+}
+
 type User {
   id: ID! @unique
   name: String!
