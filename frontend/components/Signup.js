@@ -26,41 +26,46 @@ class Signup extends Component {
   }
   render() {
     return (
-      <Form>
-        <fieldset>
-          <label htmlFor="email">
-            Email
-            <input
-              type="email"
-              name="email"
-              placeholder="email"
-              value={this.state.email}
-              onChange={this.saveToState}
-            />
-          </label>
-          <label htmlFor="name">
-            Name
-            <input
-              type="text"
-              name="name"
-              placeholder="name"
-              value={this.state.name}
-              onChange={this.saveToState}
-            />
-          </label>
-          <label htmlFor="password">
-            Password
-            <input
-              type="password"
-              name="password"
-              placeholder="password"
-              value={this.state.password}
-              onChange={this.saveToState}
-            />
-          </label>
-          <button type="submit">Sign Up</button>
-        </fieldset>
-      </Form>
+      <Mutation mutation={SIGNUP_MUTATION} variables={this.state}>
+        {(signup, {error, loading}) => (              
+          <Form>
+            <fieldset>
+              <label htmlFor="email">
+                Email
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="email"
+                  value={this.state.email}
+                  onChange={this.saveToState}
+                />
+              </label>
+              <label htmlFor="name">
+                Name
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="name"
+                  value={this.state.name}
+                  onChange={this.saveToState}
+                />
+              </label>
+              <label htmlFor="password">
+                Password
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="password"
+                  value={this.state.password}
+                  onChange={this.saveToState}
+                />
+              </label>
+              <button type="submit">Sign Up</button>
+            </fieldset>
+          </Form>
+        )
+      }
+    </Mutation>
     )
   }
 }
