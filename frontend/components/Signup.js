@@ -6,6 +6,11 @@ import Form from './styles/Form';
 import Error from './ErrorMessage';
 
 class Signup extends Component {
+  state={
+    name: '',
+    email: '',
+    password: '',
+  }
   render() {
     return (
       <Form>
@@ -13,7 +18,7 @@ class Signup extends Component {
           <label htmlFor="email">
             Email
             <input
-              type="text"
+              type="email"
               name="email"
               placeholder="email"
               value={this.state.email}
@@ -33,13 +38,14 @@ class Signup extends Component {
           <label htmlFor="password">
             Password
             <input
-              type="text"
+              type="password"
               name="password"
               placeholder="password"
               value={this.state.password}
               onChange={this.saveToState}
             />
           </label>
+          <button type="submit">Sign Up</button>
         </fieldset>
       </Form>
     )
