@@ -5,6 +5,16 @@ import gql from 'graphql-tag';
 import Form from './styles/Form';
 import Error from './ErrorMessage';
 
+const SIGNUP_MUTATION = gql`
+  mutation SIGNUP_MUTATION($email: String!, $name: String!, $password: String!) {
+    signup(email: $email, name: $name, password: $password) {
+      id
+      email
+      name
+    }
+  }
+`;
+
 class Signup extends Component {
   state={
     name: '',
