@@ -10,6 +10,9 @@ class Signup extends Component {
     name: '',
     email: '',
     password: '',
+  };
+  saveToState = (e) => {
+    this.setState({[e.target.name]: e.target.value});
   }
   render() {
     return (
