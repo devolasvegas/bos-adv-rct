@@ -56,7 +56,7 @@ class Signin extends Component {
                   onChange={this.saveToState}
                 />
               </label>
-              <button type="submit">Sign Up</button>
+              <button type="submit">Sign In</button>
             </fieldset>
           </Form>
         )
