@@ -6,8 +6,8 @@ import Form from './styles/Form';
 import Error from './ErrorMessage';
 
 const SIGNIN_MUTATION = gql`
-  mutation SIGNIN_MUTATION($email: String!, $name: String!, $password: String!) {
-    signin(email: $email, name: $name, password: $password) {
+  mutation SIGNIN_MUTATION($email: String!, $password: String!) {
+    signin(email: $email, password: $password) {
       id
       email
       name
@@ -42,16 +42,6 @@ class Signin extends Component {
                   name="email"
                   placeholder="email"
                   value={this.state.email}
-                  onChange={this.saveToState}
-                />
-              </label>
-              <label htmlFor="name">
-                Name
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="name"
-                  value={this.state.name}
                   onChange={this.saveToState}
                 />
               </label>
