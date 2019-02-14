@@ -89,6 +89,11 @@ const Mutations = {
     ctx.response.clearCookie('token');
     return { message: 'goodbye' };
   },
+  requestReset(parent, args, ctx, info) {
+    // 1. Verify user
+    // 2. Set a reset token and expiry for user
+    // 3. Email the reset token to the user
+  },
 };
 
 module.exports = Mutations;
