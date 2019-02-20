@@ -9,8 +9,7 @@ import { CURRENT_USER_QUERY } from './User'
 const REQUEST_RESET_MUTATION = gql`
   mutation REQUEST_RESET_MUTATION($email: String!, $password: String!) {
     signin(email: $email) {
-      id
-      email
+      message
     }
   }
 `;
@@ -28,14 +27,14 @@ class Signin extends Component {
         mutation={REQUEST_RESET_MUTATION} 
         variables={this.state}
       >
-        {(signin, {error, loading}) => (              
+        {(reset, {error, loading}) => (              
           <Form method="post" onSubmit={async e => {
             e.preventDefault();
-            await signin();
-            this.setState({email: '', name: '', password: ''});
+            await reset();
+            this.setState({email: ''});
           }}>
             <fieldset disabled={loading} aria-busy={loading}>
-              <h2>Sign In to Your Account</h2>
+              <h2>Request Password Reset</h2>
               <Error error={error} />
               <label htmlFor="email">
                 Email
@@ -47,17 +46,7 @@ class Signin extends Component {
                   onChange={this.saveToState}
                 />
               </label>
-              <label htmlFor="password">
-                Password
-                <input
-                  type="password"
-                  name="password"
-                  placeholder="password"
-                  value={this.state.password}
-                  onChange={this.saveToState}
-                />
-              </label>
-              <button type="submit">Sign In</button>
+              <button type="submit">Request Reset!</button>
             </fieldset>
           </Form>
         )
