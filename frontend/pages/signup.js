@@ -14,6 +14,7 @@ const SignupPage = () => (
   <Columns>
     <Signup />
     <Signin />
+    <RequestReset />
   </Columns>
 )
 
