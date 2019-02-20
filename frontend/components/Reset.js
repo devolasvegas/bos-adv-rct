@@ -1,21 +1,33 @@
 import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
+import PropTypes from 'prop-types';
 
 import Form from './styles/Form';
 import Error from './ErrorMessage';
 
-const REQUEST_RESET_MUTATION = gql`
-  mutation REQUEST_RESET_MUTATION($email: String!) {
-    requestReset(email: $email) {
-      message
+const RESET_MUTATION = gql`
+  mutation RESET_MUTATION($resetToken: String!, $password: String!, $confirmPassword: !String) {
+    resetPassword(
+      resetToken: $resetToken,
+      password: $password,
+      confirmPassword: $confirmPassword
+    ) {
+      id
+      email
+      name
     }
   }
 `;
 
-class RequestReset extends Component {
+class Reset extends Component {
+  static propTypes = {
+    resetToken: PropTypes.string.isRequired,
+  }
+
   state={
-    email: '',
+    password: '',
+    resetPassword: ''
   };
   saveToState = e => {
     this.setState({[e.target.name]: e.target.value});
@@ -23,8 +35,12 @@ class RequestReset extends Component {
   render() {
     return (
       <Mutation 
-        mutation={REQUEST_RESET_MUTATION} 
-        variables={this.state}
+        mutation={RESET_MUTATION} 
+        variables={{
+          resetToken: this.props.resetToken,
+          password: this.state.password,
+          confirmPassword: this.state.confirmPassword
+        }}
       >
         {(reset, { error, loading, called }) => (              
           <Form method="post" onSubmit={async e => {
@@ -33,20 +49,29 @@ class RequestReset extends Component {
             this.setState({email: ''});
           }}>
             <fieldset disabled={loading} aria-busy={loading}>
-              <h2>Request Password Reset</h2>
+              <h2>Reset Your Password</h2>
               <Error error={error} />
-              { !error && !loading && called && <p>Success! Check your inbox for a password reset link.</p> }
-              <label htmlFor="email">
-                Email
+              <label htmlFor="password">
+                Password
                 <input
-                  type="email"
-                  name="email"
-                  placeholder="email"
-                  value={this.state.email}
+                  type="password"
+                  name="password"
+                  placeholder="password"
+                  value={this.state.password}
                   onChange={this.saveToState}
                 />
               </label>
-              <button type="submit">Request Reset!</button>
+              <label htmlFor="confirmPassword">
+                Confirm Your Password
+                <input
+                  type="confirmPassword"
+                  name="confirmPassword"
+                  placeholder="confirmPassword"
+                  value={this.state.confirmPassword}
+                  onChange={this.saveToState}
+                />
+              </label>
+              <button type="submit">Reset Your Password</button>
             </fieldset>
           </Form>
         )
@@ -56,4 +81,4 @@ class RequestReset extends Component {
   }
 }
 
-export default RequestReset;
+export default Reset;
