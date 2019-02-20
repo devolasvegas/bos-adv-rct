@@ -4,17 +4,16 @@ import gql from 'graphql-tag';
 
 import Form from './styles/Form';
 import Error from './ErrorMessage';
-import { CURRENT_USER_QUERY } from './User'
 
 const REQUEST_RESET_MUTATION = gql`
   mutation REQUEST_RESET_MUTATION($email: String!, $password: String!) {
-    signin(email: $email) {
+    requestReset(email: $email) {
       message
     }
   }
 `;
 
-class Signin extends Component {
+class RequestReset extends Component {
   state={
     email: '',
   };
@@ -56,4 +55,4 @@ class Signin extends Component {
   }
 }
 
-export default Signin;
+export default RequestReset;
